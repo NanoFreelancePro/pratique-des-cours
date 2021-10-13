@@ -22,6 +22,7 @@ time, mark, audio, video {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
+    margin-block: 0;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
@@ -55,6 +56,7 @@ table {
 $color-bg: #0A2239;
 $color-project: #A5C4D4;
 $color-content: #8499B1;
+$color-link: black;
 
 /* Mixin */
 @mixin color-contents ($color){
@@ -70,10 +72,12 @@ $color-content: #8499B1;
     text-align: center;
 }
 @mixin content__name--style {
+    margin-bottom: 3px;
     font-size: 1em;
-    text-align: left;
+    text-align: center;
 }
 @mixin content__text--style{
+    margin: 0 5px 10px;
     font-size: .8em;
     font-style: italic;
 }
@@ -89,13 +93,29 @@ $color-content: #8499B1;
     box-shadow: 2px 2px 11px 0px $color;
 }
 
-
-
 /* CONTENT */
 body{
     font-family: "roboto 300";
     background: $color-bg;
 }
+
+a{
+    text-decoration: none; 
+}
+
+a:link{
+    text-decoration: none;
+    color: $color-link;
+}
+/* a:hover{
+    ;
+} */
+a:visited{
+    color: $color-link;
+}
+/* a:active{
+
+} */
 
 .project{
     display: flex;
@@ -115,8 +135,7 @@ body{
         font-weight: bold;
         text-align: center;
     }
-    &__ending{
-        width: 94%;
+    &__text--end{
         @include content__title--style();
         text-align: left;
         margin-bottom: 20px;
@@ -125,25 +144,20 @@ body{
 
 
 .content{
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
     width: 20%;
-    height: 200px;
+    height: auto;
     margin: 2%;
     background: $color-content;
     border-radius: 20px;
     @include border-shadow-content();
-        &__title{
-            width: 40%;
-            height: 20px;
-            margin-top: auto;
+        &__link{
+            display: block;
+            height: 100%;
+        }
+        &__title{    
             @include content__title--style();
         }
         &__name{
-            width: 60%;
-            height: 20px;
-            margin-top: auto;
             @include content__name--style();
         }
         &__pic{
@@ -152,8 +166,61 @@ body{
             height: 100px;
         }
         &__text{
-            height: 60px;
-            margin: auto 5px;
             @include content__text--style();
         }
+}
+
+/* EXERCICES */
+/* MAPS */
+/* Dans cette exercice j'ai créé un boutton "RECHERCHER"
+Le but étant de créer une MAP pour les différents états du boutton.
+A savoir link/hover/actve 
+A l'aide de variables, map et mixin on peut attribuer les couleurs */
+
+$color-primary: #26408B;
+$color-secondary: #a6cad5;
+$color-third: #0F084B;
+$color-white: #fff;
+
+$btn-mods: (
+    link:(
+        bg: $color-third,
+        border: $color-white,
+        txt: $color-white,),
+    hover:(
+        bg: $color-primary,
+        border: $color-white,
+        txt: $color-white,),
+    active:(
+        bg: $color-secondary,
+        border: $color-third,
+        txt: $color-third,),
+);
+
+@mixin btn-mods ($state){
+    $mods: map-get($btn-mods,$state);
+    background: map-get($map: $mods, $key: bg);
+    border: 2px solid map-get($map: $mods, $key: border);
+    color: map-get($map: $mods, $key: txt);
+}
+
+.form{
+text-align: center;
+&__btn{
+    width: auto;
+    height: auto;
+    padding: 1rem;
+    border: none;
+    border-radius: 30px;
+    text-transform: uppercase;
+    font-family: "roboto 300";
+    font-size: 2rem;
+    @include btn-mods(link);
+    &:hover{
+        @include btn-mods(hover);
+    }
+    &:active{
+        @include btn-mods(active);
+    }
+    }
 }
