@@ -171,11 +171,14 @@ a:visited{
 }
 
 /* EXERCICES */
-/* MAPS */
-/* Dans cette exercice j'ai créé un boutton "RECHERCHER"
-Le but étant de créer une MAP pour les différents états du boutton.
-A savoir link/hover/actve 
-A l'aide de variables, map et mixin on peut attribuer les couleurs */
+/* BOUCLE */
+/* 
+Définir des VARIABLES
+définir une MAP
+Créer une MIXIN et y integrer la boucle
+avec @each $key, $value in $map
+voir readme.txt
+*/
 
 $color-primary: #26408B;
 $color-secondary: #a6cad5;
@@ -197,11 +200,20 @@ $btn-mods: (
         txt: $color-third,),
 );
 
-@mixin btn-mods ($state){
-    $mods: map-get($btn-mods,$state);
-    background: map-get($map: $mods, $key: bg);
-    border: 2px solid map-get($map: $mods, $key: border);
-    color: map-get($map: $mods, $key: txt);
+@mixin link {
+    background: $color-third;
+    border: 2px solid $color-white;
+    color: $color-white;
+}
+
+@mixin btn-mod ($btn-mods){
+    @each $state, $btn-mod in $btn-mods{
+        &:#{$state}{
+            background-color: map-get($map: $btn-mod,$key: bg);
+            border: 2px solid map-get($map: $btn-mod, $key: border);
+            color: map-get($map: $btn-mod, $key: txt);
+        }
+    }
 }
 
 .form{
@@ -215,12 +227,7 @@ text-align: center;
     text-transform: uppercase;
     font-family: "roboto 300";
     font-size: 2rem;
-    @include btn-mods(link);
-    &:hover{
-        @include btn-mods(hover);
-    }
-    &:active{
-        @include btn-mods(active);
-    }
+    @include link();
+    @include btn-mod($btn-mods);
     }
 }
