@@ -145,11 +145,14 @@ a:visited {
 }
 
 /* EXERCICES */
-/* MAPS */
-/* Dans cette exercice j'ai créé un boutton "RECHERCHER"
-Le but étant de créer une MAP pour les différents états du boutton.
-A savoir link/hover/actve 
-A l'aide de variables, map et mixin on peut attribuer les couleurs */
+/* BOUCLE */
+/* 
+Définir des VARIABLES
+définir une MAP
+Créer une MIXIN et y integrer la boucle
+avec @each $key, $value in $map
+voir readme.txt
+*/
 .form {
   text-align: center;
 }
@@ -166,13 +169,18 @@ A l'aide de variables, map et mixin on peut attribuer les couleurs */
   border: 2px solid #fff;
   color: #fff;
 }
+.form__btn:link {
+  background-color: #0F084B;
+  border: 2px solid #fff;
+  color: #fff;
+}
 .form__btn:hover {
-  background: #26408B;
+  background-color: #26408B;
   border: 2px solid #fff;
   color: #fff;
 }
 .form__btn:active {
-  background: #a6cad5;
+  background-color: #a6cad5;
   border: 2px solid #0F084B;
   color: #0F084B;
 }
