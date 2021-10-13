@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
    License: none (public domain)
@@ -23,6 +24,7 @@ time, mark, audio, video {
   font-size: 100%;
   font: inherit;
   vertical-align: baseline;
+  margin-block: 0;
 }
 
 /* HTML5 display-role reset for older browsers */
@@ -63,6 +65,25 @@ body {
   background: #0A2239;
 }
 
+a {
+  text-decoration: none;
+}
+
+a:link {
+  text-decoration: none;
+  color: black;
+}
+
+/* a:hover{
+    ;
+} */
+a:visited {
+  color: black;
+}
+
+/* a:active{
+
+} */
 .project {
   display: flex;
   flex-wrap: wrap;
@@ -82,8 +103,7 @@ body {
   font-weight: bold;
   text-align: center;
 }
-.project__ending {
-  width: 94%;
+.project__text--end {
   font-size: 1.2em;
   font-weight: bold;
   text-align: center;
@@ -92,30 +112,26 @@ body {
 }
 
 .content {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
   width: 20%;
-  height: 200px;
+  height: auto;
   margin: 2%;
   background: #8499B1;
   border-radius: 20px;
   box-shadow: 2px 2px 11px 0px #0A2239;
 }
+.content__link {
+  display: block;
+  height: 100%;
+}
 .content__title {
-  width: 40%;
-  height: 20px;
-  margin-top: auto;
   font-size: 1.2em;
   font-weight: bold;
   text-align: center;
 }
 .content__name {
-  width: 60%;
-  height: 20px;
-  margin-top: auto;
+  margin-bottom: 3px;
   font-size: 1em;
-  text-align: left;
+  text-align: center;
 }
 .content__pic {
   object-fit: cover;
@@ -123,10 +139,42 @@ body {
   height: 100px;
 }
 .content__text {
-  height: 60px;
-  margin: auto 5px;
+  margin: 0 5px 10px;
   font-size: 0.8em;
   font-style: italic;
+}
+
+/* EXERCICES */
+/* MAPS */
+/* Dans cette exercice j'ai créé un boutton "RECHERCHER"
+Le but étant de créer une MAP pour les différents états du boutton.
+A savoir link/hover/actve 
+A l'aide de variables, map et mixin on peut attribuer les couleurs */
+.form {
+  text-align: center;
+}
+.form__btn {
+  width: auto;
+  height: auto;
+  padding: 1rem;
+  border: none;
+  border-radius: 30px;
+  text-transform: uppercase;
+  font-family: "roboto 300";
+  font-size: 2rem;
+  background: #0F084B;
+  border: 2px solid #fff;
+  color: #fff;
+}
+.form__btn:hover {
+  background: #26408B;
+  border: 2px solid #fff;
+  color: #fff;
+}
+.form__btn:active {
+  background: #a6cad5;
+  border: 2px solid #0F084B;
+  color: #0F084B;
 }
 
 /*# sourceMappingURL=style.css.map */
