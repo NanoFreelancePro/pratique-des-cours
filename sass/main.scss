@@ -57,6 +57,8 @@ $color-bg: #0A2239;
 $color-project: #A5C4D4;
 $color-content: #8499B1;
 $color-link: black;
+$breakpoints : (
+    mobile: 599px);
 
 /* Mixin */
 @mixin color-contents ($color){
@@ -93,6 +95,12 @@ $color-link: black;
     box-shadow: 2px 2px 11px 0px $color;
 }
 
+@mixin mobile-only {
+    @media screen and (max-width: map-get($breakpoints, mobile)) {
+        @content;
+    }
+}
+
 /* CONTENT */
 body{
     font-family: "roboto 300";
@@ -126,6 +134,9 @@ a:visited{
     background: $color-project;
     border-radius: 30px;
     @include border-shadow-bloc();
+    @media (max-width: 1400px){
+        width: 100%;
+    }
     &__title{
         width: 100%;
         height: 30px;
@@ -152,6 +163,13 @@ a:visited{
     border-radius: 20px;
     @include border-shadow-content();
     overflow: hidden;
+    @media (max-width: 1400px){
+        width: 40%;
+        min-width: 450px;
+    }
+    @include mobile-only{
+        width: 70%;
+    }
         &__link{
             display: block;
             height: 100%;
@@ -223,9 +241,11 @@ $btn-mods: (
 .form{
 text-align: center;
 &__btn{
+    cursor: pointer;
     width: auto;
     height: auto;
     padding: 1rem;
+    margin-bottom: 50px;
     border: none;
     border-radius: 30px;
     text-transform: uppercase;
@@ -237,4 +257,49 @@ text-align: center;
 }
 
 
-  
+/* Voici le challenge : automatiser la création de modificateurs qui changent la couleur du texte de  .article__headline  pour les valeurs de couleurs suivantes :
+
+#cc8624 (orange).
+#cc2475 (rose).
+#2469cc (bleu)
+#24cc24 (vert).
+
+Mettez les valeurs dans une map en attribuant une clé à chacune, puis utilisez une boucle @each pour générer des sélecteurs ayant la structure suivante :
+
+.article__heading--/*colour name goes here*/ 
+/*  color:colour values goes here */ 
+
+$heading--colors:(
+    orange: #cc8624,
+    rose:#cc2475,
+    bleu:#2469cc,
+    vert:#24cc24,);
+
+@mixin heading--color ($heading-colors){
+    @each $name, $color in $heading--colors{
+        &--#{$name}{
+            color: $color;
+            cursor: pointer;
+            background: #fff;
+            width: 100px;
+            height: auto;
+            padding: 1rem;
+            margin: 20px auto;
+            text-align: center;
+            border-radius: 20px;
+            border: 1px solid $color-bg;
+        }
+        
+    }   
+}
+
+.article{
+    background: $color-project;
+    height: auto;
+    padding: 20px;
+    border-radius: 30px;
+    box-shadow: 2px 2px 11px 0px #123c64;
+    &__heading{
+        @include heading--color($heading--colors);
+    }
+}
