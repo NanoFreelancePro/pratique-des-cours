@@ -274,4 +274,23 @@ Mettez les valeurs dans une map en attribuant une clé à chacune, puis utilisez
   border: 1px solid #0A2239;
 }
 
+/* TRANSITIONS */
+.btn {
+  width: 40%;
+  margin: 20px auto;
+  background: #011c37;
+  color: #15DEA5;
+  font-size: 3rem;
+  text-align: center;
+  cursor: pointer;
+  padding: 1.85rem 3rem;
+  border-radius: 10rem;
+  border: 1px solid #fff;
+  transform: scale(1);
+  transition: transform 400ms;
+}
+.btn:hover {
+  transform: scale(1.15);
+}
+
 /*# sourceMappingURL=style.css.map */
