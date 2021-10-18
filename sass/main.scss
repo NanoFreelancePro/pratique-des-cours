@@ -645,3 +645,46 @@ $btn-height: 7.5vw;
 .lightsaber {
 	position: relative;
 }
+
+/* Button */
+
+$border-rad: 2rem;
+$clr-btn: #15DEA5;
+
+.blocopac{
+    height: 200px;
+    width: 100%;
+    background: $color-project;
+    padding: 20px 0;
+}
+
+.button {
+    display: block;
+    position: relative;
+    z-index: 1;
+    width: auto;
+    margin: 40px auto;
+    padding: 1rem;
+    border-radius: $border-rad;
+    background-color: $clr-btn;
+    overflow: hidden;
+    border: none;
+    color: none;
+    &:hover {
+        &::after{
+            opacity: 1;
+        }
+    }
+    &::after{
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: radial-gradient(circle, lighten($clr-btn, 5) 0%, darken($clr-btn, 10) 100%);
+        opacity: 0;
+        z-index: -1;
+        transition: opacity 250ms;
+    }
+}
