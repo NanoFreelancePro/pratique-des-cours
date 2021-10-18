@@ -179,7 +179,7 @@ voir readme.txt
 .form__btn {
   cursor: pointer;
   width: auto;
-  height: auto;
+  height: 200Px;
   padding: 1rem;
   margin-bottom: 50px;
   border: none;
@@ -190,6 +190,8 @@ voir readme.txt
   background: #0F084B;
   border: 2px solid #fff;
   color: #fff;
+  transform: rotate(0) scale(1);
+  transition: all 400ms ease-in-out;
 }
 .form__btn:link {
   background-color: #0F084B;
@@ -205,6 +207,18 @@ voir readme.txt
   background-color: #a6cad5;
   border: 2px solid #0F084B;
   color: #0F084B;
+}
+.form__btn:hover {
+  transform: rotate(720deg) scale(1.4);
+}
+.form__btn:hover span {
+  transform: scale(1);
+}
+
+span {
+  display: block;
+  transform: scale(0.5);
+  transition: scale 400ms ease-in-out;
 }
 
 /* Voici le challenge : automatiser la création de modificateurs qui changent la couleur du texte de  .article__headline  pour les valeurs de couleurs suivantes :
@@ -275,6 +289,7 @@ Mettez les valeurs dans une map en attribuant une clé à chacune, puis utilisez
 }
 
 /* TRANSITIONS */
+/* Bouton qui grandit */
 .btn {
   width: 40%;
   margin: 20px auto;
@@ -286,7 +301,7 @@ Mettez les valeurs dans une map en attribuant une clé à chacune, puis utilisez
   padding: 1.85rem 3rem;
   border-radius: 10rem;
   border: 1px solid #fff;
-  transition: all 1000ms ease;
+  transition: scale 1000ms ease;
 }
 .btn:hover {
   transform: scale(1.15);
@@ -296,18 +311,31 @@ Mettez les valeurs dans une map en attribuant une clé à chacune, puis utilisez
 .btn:active + .ball {
   transform: scale(1);
 }
-
-.ball {
-  width: 300px;
-  height: 300px;
-  background: #15DEA5;
-  margin: 3rem auto;
-  border: 2px solid #fff;
-  border-radius: 150px;
-  transform: scale(0.1);
-  transition: transform 3000ms cubic-bezier(0, 0.75, 0.08, 1);
+.btn:active + .ball span {
+  transform: translate(-70px, 10px);
 }
 
+.ball {
+  width: 100px;
+  height: 100px;
+  background: #15DEA5;
+  margin: 3rem auto;
+  padding: 2em;
+  border: 2px solid #fff;
+  border-radius: 50px;
+  transform: scale(0.5);
+  transition: transform 3000ms cubic-bezier(0, 0.75, 0.08, 1);
+  overflow: hidden;
+  text-align: center;
+  font-size: 2em;
+}
+.ball span {
+  display: inline-block;
+  transform: translate(0, 500px);
+  transition: transform 100ms ease-in-out 50ms;
+}
+
+/* Input invalid */
 .container {
   background-color: #0A2239;
   font-size: 2.5rem;
@@ -321,7 +349,7 @@ label {
 .form__group input {
   border: 2px solid #fff;
   border-radius: 100rem;
-  color: #6300a0;
+  color: #15DEA5;
   font-family: "Montserrat", sans-serif;
   font-size: 2.5rem;
   outline: none;
@@ -330,12 +358,221 @@ label {
   transition: background-color 300ms;
 }
 .form__group input:focus {
-  border: 2px solid #6300a0;
+  border: 2px solid #15DEA5;
 }
 .form__group input:not(:focus):invalid {
   background-color: #b20a37;
   border: 2px solid #b20a37;
   color: #fff;
+}
+
+/* Bouton qui tourne */
+.combine {
+  background: #0A2239;
+  margin: 2.5rem;
+  height: 300px;
+}
+.combine__btn {
+  width: 40%;
+  margin: 20px auto;
+  background: #fff;
+  color: #0A2239;
+  cursor: pointer;
+  padding: 1.85rem 3rem;
+  border-radius: 10rem;
+  border: 1px solid #fff;
+  font-size: 3rem;
+  text-align: center;
+}
+.combine__ball {
+  width: 100px;
+  height: auto;
+  background: #15DEA5;
+  margin: 3rem auto;
+  padding: 2em;
+  border: 2px solid #fff;
+  border-radius: 20px;
+  transform: scale(1) rotate(0deg);
+  transition: all 300ms ease-in-out;
+  overflow: hidden;
+}
+.combine__txt {
+  padding: auto;
+  text-align: center;
+  font-size: 2rem;
+  transform: translate(0, -200px);
+}
+
+.combine__btn:active + .combine__ball {
+  transform: scale(1.5) rotate(360deg) skew(10deg, 0);
+}
+.combine__btn:active + .combine__ball .combine__txt {
+  transform: translate(-20px, 0);
+  transition: transform 300ms ease-in-out;
+}
+
+/* Barre de chargement */
+.charge {
+  width: auto;
+  height: 200Px;
+  background: #8499B1;
+  padding: 40px;
+}
+.charge__btn {
+  cursor: pointer;
+  width: 150px;
+  margin: 20px auto;
+  padding: 15px;
+  background: #0A2239;
+  color: #A5C4D4;
+  font-size: 2rem;
+  text-align: center;
+  border-radius: 20px;
+}
+.charge__btn:active + .charge__progress > .charge__progress__bar {
+  transform: scaleX(1);
+}
+.charge__progress {
+  width: 1000px;
+  height: 20px;
+  margin: 10px auto;
+  border: 2px solid black;
+  background: #fff;
+}
+.charge__progress__bar {
+  margin: 5px;
+  height: 10px;
+  background: #15DEA5;
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: all 2000ms cubic-bezier(0.32, 0, 0.07, 1);
+}
+
+/* .charge__btn:active + .charge__progress > .charge__progress__bar{
+    transform: scaleX(1);
+} */
+/* Bouton 3D */
+.button3d {
+  margin: 300px auto;
+  width: 75%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column-reverse;
+}
+.button3d .btn3d {
+  color: white;
+  font-size: 3.5rem;
+  cursor: pointer;
+  position: relative;
+  width: 25vw;
+  height: 7.5vw;
+  perspective: 500px;
+}
+.button3d .btn3d:active > .btn__flip {
+  transform: rotateX(-90deg);
+}
+.button3d .btn3d .btn__flip {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform-style: preserve-3d;
+  transform-origin: center bottom 3.75vw;
+  transition: transform 500ms cubic-bezier(0.7, 0.01, 0.23, 0.99);
+  transform: rotateX(0deg);
+}
+.button3d .btn3d .btn__flip .btn__flip--off {
+  transform: rotateX(0deg) translateZ(3.75vw);
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #EE6352;
+}
+.button3d .btn3d .btn__flip .btn__flip--on {
+  transform: rotateX(90deg) translateZ(3.75vw);
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #59CD90;
+}
+
+/* Sabre JEDI */
+.lightsaber .hilt {
+  cursor: pointer;
+  width: 15px;
+  height: 50px;
+  border-bottom: solid 4px grey;
+  border-top: solid 5px grey;
+  border-radius: 5px;
+  z-index: 1;
+  background: #e2e2e2;
+  background: linear-gradient(to right, #e2e2e2 0%, #dbdbdb 50%, #d1d1d1 51%, #fefefe 100%);
+}
+.lightsaber .hilt > .switch {
+  background: #b94a37;
+  width: 3px;
+  height: 10px;
+  position: absolute;
+  bottom: 25px;
+  left: 13px;
+  border-radius: 10px;
+}
+.lightsaber .hilt:active + .plasma {
+  transform: scale(1, 1);
+}
+.lightsaber .hilt:active > .switch {
+  transform: scale(0.7, 1);
+}
+
+.lightsaber .plasma {
+  transition: transform 300ms;
+  border-radius: 12px 12px 0 0;
+  position: absolute;
+  bottom: 45px;
+  left: 2px;
+  width: 10px;
+  display: block;
+  transform: scale(1, 0);
+  height: 250px;
+  transform-origin: bottom center;
+  z-index: -1;
+  filter: blur(1px);
+}
+
+.vader {
+  background: linear-gradient(to right, #e51115 0%, #fefefe 30%, #fefefe 47%, #fefefe 71%, #e51115 100%);
+  box-shadow: 0 0 10px #e51115;
+}
+
+.lightsaber-example {
+  display: flex;
+  justify-content: center;
+  padding-top: 325px;
+}
+
+.lightsaber {
+  position: relative;
 }
 
 /*# sourceMappingURL=style.css.map */
