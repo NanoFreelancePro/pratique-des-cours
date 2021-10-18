@@ -303,3 +303,84 @@ $heading--colors:(
         @include heading--color($heading--colors);
     }
 }
+
+
+/* TRANSITIONS */
+
+$cd-btn: #011c37;
+$cd-txt: #15DEA5;
+$ball-size: 300px;
+$cd-btn-start: rgba(1, 28, 55, 0);
+$cd-btn-end: rgba(1, 28, 55, 1);
+
+.btn {
+    width: 40%;
+    margin: 20px auto;
+    background: $color-white;
+    color: $color-bg;
+    font-size: 3rem;
+    text-align: center;
+    cursor: pointer;
+    padding: 1.85rem 3rem;
+    border-radius: 10rem;
+    border: 1px solid #fff; 
+    transition: all 1000ms ease;
+    &:hover{
+        transform: scale(1.15);
+        background: $cd-btn-end;
+        color: $cd-txt;
+    }
+    &:active + .ball {
+        transform: scale(1);
+    }
+}
+
+.ball{
+    width: $ball-size;
+    height: $ball-size;
+    background: $cd-txt;
+    margin: 3rem auto;
+    border: 2px solid #fff;
+    border-radius: $ball-size * 0.5;
+    transform: scale(0.1);
+    transition: transform 3000ms cubic-bezier(0, .75, .08, 1);
+}
+
+$cd-txt: #6300a0;
+$cd-box: #fff;
+$cd-txt--invalid: #fff;
+$cd-danger: #b20a37;
+
+.container {
+  background-color: $color-bg;
+  font-size: 2.5rem;
+  margin: 2.5rem;
+}
+
+label{
+    color: $color-project;
+}
+
+.form {
+  &__group {
+      & input {
+      border: 2px solid $cd-box;
+      border-radius: 100rem;
+      color: $cd-txt;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.5rem;
+      outline: none;
+      padding: .5rem 1.5rem;
+      width: 500px;
+      transition: background-color 300ms;
+      &:focus {
+          border: 2px solid $cd-txt;
+          }
+          &:not(:focus):invalid{
+            background-color: $cd-danger;
+            border: 2px solid $cd-danger;
+            color: $cd-txt--invalid;
+          }
+      }
+  }
+}
