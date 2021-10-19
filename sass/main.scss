@@ -375,7 +375,7 @@ $cd-btn-end: rgba(1, 28, 55, 1);
     }
 }
 
-/* Input invalid */
+/* Input invalid @keyframes animation-iteration-count */
 
 $cd-box: #fff;
 $cd-txt--invalid: #fff;
@@ -391,6 +391,17 @@ label{
     color: $color-project;
 }
 
+$shake-intensity:1%;
+
+@keyframes headshake {
+    25%{
+        transform: translateX($shake-intensity);
+    }
+    75%{
+        transform: translateX(-$shake-intensity);
+    }
+}
+
 .form {
   &__group {
       & input {
@@ -402,15 +413,17 @@ label{
       outline: none;
       padding: .5rem 1.5rem;
       width: 500px;
-      transition: background-color 300ms;
-      &:focus {
+      /* transition: background-color 300ms; */
+        &:focus {
           border: 2px solid $cd-txt;
           }
-          &:not(:focus):invalid{
-            background-color: $cd-danger;
-            border: 2px solid $cd-danger;
-            color: $cd-txt--invalid;
-          }
+        &:not(:focus):invalid{
+          background-color: $cd-danger;
+          border: 2px solid $cd-danger;
+          color: $cd-txt--invalid;
+          animation: headshake 100ms cubic-bezier(.4,.1,.6,.9) 2;
+          /* animation-iteration-count: 2; */
+        }
       }
   }
 }
@@ -465,6 +478,27 @@ label{
 
 
 /* Barre de chargement */
+@keyframes progress-bar {
+    0% {
+        transform: scaleX(0);
+    }
+    17%{
+        transform: scaleX(.18);
+    }
+    24%{
+        transform: scaleX(.4);
+    }
+    46%{
+        transform: scaleX(.81);
+    }
+    85%,100%{
+        opacity: 1;
+    }
+    100%{
+        transform: scaleX(1);
+    }
+}
+
 .charge{
     width: auto;
     height: 200Px;
@@ -481,7 +515,8 @@ label{
         text-align: center;
         border-radius: 20px;
         &:active + .charge__progress > .charge__progress__bar{
-            transform: scaleX(1);
+            /* transform: scaleX(1); */
+            animation: progress-bar 1000ms;
         }
     }
     &__progress{
@@ -496,7 +531,8 @@ label{
             background: #15DEA5;
             transform-origin: left;
             transform: scaleX(0);
-            transition: all 2000ms cubic-bezier(.32, 0, .07, 1);
+            opacity: 0;
+            /* transition: all 2000ms cubic-bezier(.32, 0, .07, 1); */
         }
     }
 }
@@ -686,5 +722,156 @@ $clr-btn: #15DEA5;
         opacity: 0;
         z-index: -1;
         transition: opacity 250ms;
+    }
+}
+
+/* KEYFRAMES CHAT */
+
+$duration-progress: 1000ms;
+$duration-delay: 100ms;
+$duration-cat-delay: $duration-progress + $duration-delay*2;
+
+@keyframes barre__charge{
+    0% {
+        transform: scaleX(0);
+        opacity: .1;
+    }
+    17% {
+        transform: scaleX(.18);
+    }
+    24% {
+        transform: scaleX(.4);
+        animation-timing-function: cubic-bezier(.9,0,.1,1);
+    }
+    46% {
+        transform: scaleX(.81);
+        animation-timing-function: cubic-bezier(.25,0.25,1);
+    }
+    85%,100% {
+        opacity: 1;
+    }
+    100% {
+        transform: scaleX(1);
+    }
+}
+
+@keyframes cat {
+    0%{
+        transform: translateX(-9999px);
+    }
+    100%{
+        transform: translateX(0);
+    }   
+}
+
+.exo{
+    height: 40vw;
+}
+
+.barre{
+    width: 50vw;
+    height: 20px;
+    margin: 10px auto;
+    border: 2px solid black;
+    background: $color-white;
+    &__charge{
+        margin: 5px;
+        height: 10px;
+        background: #15DEA5;
+        transform-origin: left;
+        transform: scaleX(0.5);
+        animation: barre__charge $duration-progress $duration-delay both;
+        /* animation-timing-function: cubic-bezier(.9,0,.1,1); */
+        /* animation-fill-mode: both; */
+    }
+}
+
+.cat {
+    width: 50vw;
+    height: 30vw;
+    position: absolute;
+    overflow: hidden;
+    background-image: url("https://bit.ly/2XJJLKn");
+    background-size: cover;
+    background-position: -20%;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: .1rem;
+    font-size: 4vw;
+    font-weight: 900;
+    color: white;
+    animation: cat 0ms $duration-cat-delay both;
+}
+
+
+/* LOADER 5 barres */
+
+.container{
+    padding: 50px 0 50px 100px;
+}
+
+$cd-bars: #15DEA5;
+$cd-bars-inv: #0E397F;
+$size: 3vh;
+$num-bars: 5;
+$anim-dur: 1000ms;
+$anim-delay: $anim-dur / $num-bars;
+
+@keyframes bars {
+    0%{
+        transform: scaleY(0.5);
+    }
+    100%{
+        transform: scaleY(1);
+    }
+}
+
+.load {
+    width: $size*10;
+    height: $size*7.5;
+    display: flex;
+    justify-content: space-evenly;
+    &__bar {
+        background-color: $cd-bars;
+        height: 100%;
+        width: $size;
+        animation: bars $anim-dur backwards infinite ease-in-out alternate;
+        /* animation-direction: alternate; */
+        @for $i from 1 through $num-bars {
+            &--#{$i} {
+                animation-delay: $anim-delay * $i;
+            }
+            &--#{$i}-inv {
+                animation-delay: $anim-delay * $i + random(100)*15ms;
+                animation-direction: alternate-reverse;
+                background-color: $cd-bars-inv;
+                &:hover{
+                    animation-play-state: paused;
+                }
+            } 
+        }
+    }
+}
+
+/* Carré qui tourne à l'infini sur hover */
+.spin {
+    background-color: #15DEA5;
+    width: 30vh;
+    height: 30vh;
+    animation: spin 3s linear infinite paused;
+    &:hover{
+        animation-play-state: running;
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
     }
 }
